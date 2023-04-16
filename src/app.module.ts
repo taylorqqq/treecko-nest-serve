@@ -43,9 +43,16 @@ config({
     {
       provide: 'DB_SERVICE', // 服务标识
       inject: ['CONFIG_SERVICE'], // 依赖注入
-      useFactory: (config) => {
-        return new DbService(config);
-      },
+      // useFactory: (config) => {
+      //   return new DbService(config);
+      // }, // 服务工厂
+      useFactory: async (config) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(new DbService(config));
+          }, 3000);
+        });
+      }, // 异步注册服务
     },
   ],
   // exports: [], // 导出服务
