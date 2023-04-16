@@ -8,6 +8,8 @@ import { AppService } from './app.service';
 import { HdService } from './hd.service';
 import { ConfigService } from './config.service';
 import { DbService } from './db.service';
+import { TestModule } from './test/test.module';
+import { HomeModule } from './home/home.module';
 
 config({
   path: path.join(__dirname, '../.env'),
@@ -16,7 +18,7 @@ config({
 // 装饰器 @Module() 用于标识一个模块
 // 完整的模块定义应该包含 imports、controllers、providers、exports 四个属性
 @Module({
-  imports: [], // 导入模块
+  imports: [TestModule, HomeModule], // 导入模块
   controllers: [AppController], // 注册控制器
   // providers: [AppService, HdService], // 注册服务
   // providers 完整写法：
