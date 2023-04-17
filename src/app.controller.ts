@@ -10,6 +10,7 @@ export class AppController {
   getHello(): any {
     // 路由处理函数
     // return this.appService.getHello()
-    return this.configService.getConfig('database.host')
+    // return this.configService.getConfig('database.host')
+    return this.configService.getConfig('app.name')
   }
 }

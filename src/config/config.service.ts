@@ -1,16 +1,16 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable, Optional } from '@nestjs/common'
 import { readdirSync } from 'fs'
 import path from 'path'
 
 @Injectable()
 export class ConfigService {
-  config = {} as any
-  constructor() {
-    const src = path.resolve(__dirname, '../configure')
-    const files = readdirSync(src) // 读取目录下的所有文件
+  //   config = {} as any
+  constructor(@Inject('CONFIG_OPTIONS') private readonly options: { path: string }, @Optional() private config: any) {
+    // const options = { path: path.resolve(__dirname, '../configure') }
+    const files = readdirSync(options.path) // 读取目录下的所有文件
     files.forEach(async (file) => {
       if (file.endsWith('.js')) {
-        const module = await import(path.resolve(__dirname, src, file))
+        const module = await import(path.resolve(__dirname, options.path, file))
         this.config = { ...this.config, ...module.default() }
       }
     })
