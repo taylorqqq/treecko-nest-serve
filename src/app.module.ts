@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import appConfig from './config'
 
 // 装饰器 @Module() 用于标识一个模块
 // 完整的模块定义应该包含 imports、controllers、providers、exports 四个属性
@@ -9,6 +10,7 @@ import { AppService } from './app.service'
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // 全局配置
+      load: [...appConfig], // 加载配置 会和.env文件合并
     }),
   ], // 导入模块
   controllers: [AppController], // 注册控制器
