@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model treecko_user {
+  id        BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  name      String
+  password  String
+  email     String?
+  avatar    String?
+  github    String?
+  douyin    String?
+  weibo     String?
+  twitter   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model treecko_category {
+  id          BigInt            @id @default(autoincrement()) @db.UnsignedBigInt
+  title       String
+  description String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  articles    treecko_article[]
+}
+
+model treecko_article {
+  id                 BigInt           @id @default(autoincrement()) @db.UnsignedBigInt
+  title              String
+  content            String           @db.Text
+  thumbnail          String?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  treecko_category   treecko_category @relation(fields: [treecko_categoryId], references: [id], onDelete: Cascade)
+  treecko_categoryId BigInt           @db.UnsignedBigInt
+}
