@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty } from 'class-validator'
+import { IsString, IsNotEmpty, Validate } from 'class-validator'
+import { IsConfirmedRule } from 'src/rules/is-confirmed.rule'
 // 数据传输对象 DTO
 
 // 如果使用接口，那么在编译时就无法发现错误 ts ==> js 时 会被忽略
@@ -18,5 +19,6 @@ export default class AddUserDto {
   @IsNotEmpty({
     message: '密码不能为空',
   })
+  @Validate(IsConfirmedRule)
   password: string
 }
