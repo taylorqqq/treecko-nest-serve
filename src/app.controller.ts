@@ -3,6 +3,7 @@ import { AppService } from './app.service' // 1.从容器中获取服务 2.提�
 import { PrismaClient } from '@prisma/client'
 import { HdPipe } from './hd/hd.pipe'
 import { AddPipe } from './add/add.pipe'
+import AddUserDto from './dto/user/add'
 
 @Controller() // 装饰器 @Controller() 用于标识一个控制器
 // @UsePipes(HdPipe) // 装饰器 @UsePipes() 对整个控制器进行处理
@@ -50,14 +51,9 @@ export class AppController {
   // }
 
   @Post('add')
-  add(@Body(AddPipe) body: Record<string, any>) {
-    console.log(body)
-    return body
-    // return this.prisma.treecko_user.create({
-    //   data: {
-    //     name: 'treecko',
-    //     password: '123456',
-    //   },
-    // })
+  add(@Body(AddPipe) dto: AddUserDto) {
+    return this.prisma.treecko_user.create({
+      data: dto,
+    })
   }
 }
