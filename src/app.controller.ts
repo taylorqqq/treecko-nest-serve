@@ -53,8 +53,11 @@ export class AppController {
   @Post('add')
   // 官方校验管道 ValidationPipe 注册在全局
   add(@Body() dto: AddUserDto) {
+    // dto 去掉 password_confirmed
+    const data = JSON.parse(JSON.stringify(dto)) as any
+    delete data.password_confirmed
     return this.prisma.treecko_user.create({
-      data: dto,
+      data,
     })
   }
   // 自定义 校验管道 AddPipe

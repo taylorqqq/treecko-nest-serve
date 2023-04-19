@@ -19,6 +19,8 @@ export default class AddUserDto {
   @IsNotEmpty({
     message: '密码不能为空',
   })
-  @Validate(IsConfirmedRule)
+  @Validate(IsConfirmedRule, {
+    message: '两次输入的密码不一致',
+  }) // password_confirmed
   password: string
 }
