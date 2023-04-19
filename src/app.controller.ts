@@ -51,9 +51,16 @@ export class AppController {
   // }
 
   @Post('add')
-  add(@Body(AddPipe) dto: AddUserDto) {
+  // 官方校验管道 ValidationPipe 注册在全局
+  add(@Body() dto: AddUserDto) {
     return this.prisma.treecko_user.create({
       data: dto,
     })
   }
+  // 自定义 校验管道 AddPipe
+  // add(@Body(AddPipe) dto: AddUserDto) {
+  //   return this.prisma.treecko_user.create({
+  //     data: dto,
+  //   })
+  // }
 }
