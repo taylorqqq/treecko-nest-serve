@@ -20,7 +20,7 @@ export class AddPipe implements PipeTransform {
 
       const errorMessages = errors.map((error) => {
         return {
-          name: error.property,
+          filed: error.property,
           message: Object.values(error.constraints).map((v) => v),
         }
       })
