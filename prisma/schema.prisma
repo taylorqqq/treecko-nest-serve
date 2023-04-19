@@ -11,7 +11,7 @@ datasource db {
 }
 
 model treecko_user {
-  id        BigInt   @id @default(autoincrement()) @db.UnsignedBigInt
+  id        Int      @id @default(autoincrement()) @db.UnsignedInt
   name      String
   password  String
   phone     String?
@@ -23,7 +23,7 @@ model treecko_user {
 }
 
 model treecko_category {
-  id          BigInt            @id @default(autoincrement()) @db.UnsignedBigInt
+  id          Int               @id @default(autoincrement()) @db.UnsignedInt
   title       String
   description String?
   createdAt   DateTime          @default(now())
@@ -32,12 +32,12 @@ model treecko_category {
 }
 
 model treecko_article {
-  id         BigInt           @id @default(autoincrement()) @db.UnsignedBigInt
+  id         Int               @id @default(autoincrement()) @db.UnsignedInt
   title      String
-  content    String           @db.Text
+  content    String            @db.Text
   thumbnail  String?
-  createdAt  DateTime         @default(now())
-  updatedAt  DateTime         @updatedAt
-  category   treecko_category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  categoryId BigInt           @db.UnsignedBigInt
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  category   treecko_category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?              @db.UnsignedInt
 }
