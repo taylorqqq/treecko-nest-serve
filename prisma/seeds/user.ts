@@ -10,7 +10,7 @@ export function user(count: number) {
         password: Random.string(6, 10),
         email: Random.email(),
         phone: Random.string('number', 11),
-        avatar: Random.image('200x100', '#50B347', '#FFF', 'png', 'avatar'),
+        avatar: Random.image('100x100', '#50B347', '#FFF', 'png', 'avatar'),
         github: Random.url('https', 'github.com'),
       },
     })
