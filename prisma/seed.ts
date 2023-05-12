@@ -14,9 +14,7 @@ function run() {
 
   mixin(20, 'treecko_user', user)
   mixin(15, 'treecko_category', category)
-  setTimeout(() => {
-    mixin(10, 'treecko_article', article)
-  }, 0)
+  mixin(10, 'treecko_article', article)
 }
 
 run()
