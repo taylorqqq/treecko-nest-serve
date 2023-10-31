@@ -23,10 +23,12 @@ export class UserService {
 
   async token({ name, id }: treecko_user) {
     return {
-      token: await this.jwt.signAsync({
-        name,
-        sub: id,
-      }),
+      data: {
+        token: await this.jwt.signAsync({
+          name,
+          sub: id,
+        }),
+      },
       code: HttpStatus.OK,
       message: '登录成功',
     }
@@ -44,6 +46,19 @@ export class UserService {
     }
 
     return await this.token(user)
+  }
+
+  info() {
+    return {
+      data: {
+        name: '木守',
+        age: 18,
+        avatar: '',
+        permissions: ['admin', 'editor', 'wangeditor'],
+      },
+      code: HttpStatus.OK,
+      message: '查询成功',
+    }
   }
 
   async findAll(query: SearchParams) {

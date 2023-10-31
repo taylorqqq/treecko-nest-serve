@@ -17,11 +17,13 @@ export class UserController {
   login(@Body() dto: LoginDto) {
     return this.user.login(dto)
   }
-
+  @Get('info')
+  info() {
+    return this.user.info()
+  }
   @Get('list')
   // @User(Role.ADMIN)
   list(@Query() query: SearchParams) {
-    console.log(query)
     return this.user.findAll(query)
   }
 }
