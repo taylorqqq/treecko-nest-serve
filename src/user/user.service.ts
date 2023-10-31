@@ -1,4 +1,4 @@
-import { PrismaService } from './../prisma/prisma.service'
+import { PrismaService } from '../prisma/prisma.service'
 import { BadRequestException, Injectable } from '@nestjs/common'
 import RegisterDto from './dto/register.dto'
 import { hash, verify } from 'argon2'
@@ -9,7 +9,7 @@ import { SearchParams } from './interface/interface'
 import { HttpStatus } from '@nestjs/common'
 
 @Injectable()
-export class AuthService {
+export class UserService {
   constructor(private prisma: PrismaService, private jwt: JwtService) {}
   async register(dto: RegisterDto) {
     const user = await this.prisma.treecko_user.create({
@@ -27,6 +27,8 @@ export class AuthService {
         name,
         sub: id,
       }),
+      code: HttpStatus.OK,
+      message: '登录成功',
     }
   }
 
